@@ -1,4 +1,4 @@
-resource "kubernetes_deployment" "peercode-question-service" {
+resource "kubernetes_deployment" "peercode_question_service" {
   metadata {
     name = "peercode-question-service"
     labels = {
@@ -25,7 +25,7 @@ resource "kubernetes_deployment" "peercode-question-service" {
       spec {
         container {
           name              = "peercode-question-service"
-          image             = "peercode_question_service:latest"
+          image             = "peercode_question_service"
           image_pull_policy = "IfNotPresent"
           port {
             container_port = var.question_service_port
@@ -87,7 +87,7 @@ resource "kubernetes_deployment" "peercode-question-service" {
   }
 }
 
-resource "kubernetes_service" "peercode-question-service" {
+resource "kubernetes_service" "peercode_question_service" {
   metadata {
     labels = {
       app = "peercode-question-service"

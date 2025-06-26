@@ -48,6 +48,9 @@ variable "OPENAI_API_KEY" {
 variable "REACT_APP_FIREBASE_API_KEY" {
   type = string
 }
+variable "REACT_APP_FIREBASE_APP_ID" {
+  type = string
+}
 variable "REACT_APP_FIREBASE_AUTH_DOMAIN" {
   type = string
 }
@@ -148,6 +151,9 @@ variable "QUESTION_SERVICE_URL" {
   type = string
 }
 variable "SERVER_PORT" {
+  type = number
+}
+variable "MATCH_SERVICE_PORT" {
   type = number
 }
 

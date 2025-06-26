@@ -43,6 +43,9 @@ variable "REACT_APP_FIREBASE_API_KEY" {
 variable "REACT_APP_FIREBASE_AUTH_DOMAIN" {
   type = string
 }
+variable "REACT_APP_FIREBASE_APP_ID" {
+  type = string
+}
 variable "REACT_APP_FIREBASE_PROJECT_ID" {
   type = string
 }
@@ -50,9 +53,6 @@ variable "REACT_APP_FIREBASE_STORAGE_BUCKET" {
   type = string
 }
 variable "REACT_APP_FIREBASE_MESSAGING_SENDER_ID" {
-  type = string
-}
-variable "REACT_APP_FIREBASE_APP_ID" {
   type = string
 }
 variable "REACT_APP_FIREBASE_MEASUREMENT_ID" {
@@ -67,12 +67,14 @@ variable "REACT_APP_SOCKET_URL" {
 variable "NODE_ENV" {
   type = string
 }
+
 variable "REACT_APP_API_GATEWAY" {
   type = string
 }
 variable "REACT_APP_URL" {
   type = string
 }
+
 #KAFKA
 variable "KAFKA_TOPICS" {
   type = string
@@ -167,6 +169,14 @@ variable "RABBITMQ_MANAGEMENT_PORT" {
   type = number
 }
 
+variable "HTTP_PORT" {
+  type = number
+}
+
+variable "HTTPS_PORT" {
+  type = number
+}
+
 variable "KAFKA_PORT" {
   type = number
 }
@@ -193,4 +203,17 @@ variable "kubeconfig_path" {
 }
 variable "client_certificate" {
   type = string
+}
+
+#Cloudflare
+variable "cloudflare_api_token" {}
+variable "cloudflare_account_id" {}
+variable "cloudflare_zone_id" {}
+
+variable "cloudflare_services" {
+  description = "Values for the services to be exposed via Cloudflare Tunnel"
+  type = map(object({
+    hostname = string # public domain name. ex: "service.example.com"
+    service  = string # private service endpoint. ex: service.apps.internaldomain.com
+  }))
 }

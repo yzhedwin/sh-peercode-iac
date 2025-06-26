@@ -6,6 +6,8 @@ terraform {
   }
 }
 
+
+
 provider "kubernetes" {
   config_path            = var.kubeconfig_path
   host                   = var.host
@@ -13,14 +15,6 @@ provider "kubernetes" {
   client_key             = base64decode(var.client_key)
   cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
 }
-
-# provider "cloudflare" {
-#   api_token = var.cloudflare_api_token
-# }
-
-# module "cloudflare" {
-#   source = "./cloudflare"
-# }
 
 module "environment" {
   source = "./environment"
@@ -31,6 +25,7 @@ module "environment" {
   REACT_APP_FIREBASE_PROJECT_ID          = var.REACT_APP_FIREBASE_PROJECT_ID
   REACT_APP_FIREBASE_API_KEY             = var.REACT_APP_FIREBASE_API_KEY
   REACT_APP_FIREBASE_MEASUREMENT_ID      = var.REACT_APP_FIREBASE_MEASUREMENT_ID
+  REACT_APP_FIREBASE_APP_ID              = var.REACT_APP_FIREBASE_APP_ID
   REACT_APP_FIREBASE_AUTH_DOMAIN         = var.REACT_APP_FIREBASE_AUTH_DOMAIN
   REACT_APP_API_GATEWAY                  = var.REACT_APP_API_GATEWAY
   REACT_APP_SOCKET_URL                   = var.REACT_APP_SOCKET_URL
@@ -43,6 +38,7 @@ module "environment" {
   JUDGE_SERVICE_URL                      = var.JUDGE_SERVICE_URL
   OPENAI_API_KEY                         = var.OPENAI_API_KEY
   LOG_LEVEL                              = var.LOG_LEVEL
+  MATCH_SERVICE_PORT                     = var.MATCH_SERVICE_PORT
 
 
   KAFKA_TOPIC_QUESTION_SERVICE                   = var.KAFKA_TOPIC_QUESTION_SERVICE
@@ -119,3 +115,22 @@ module "leecode_service" {
   config_map            = module.environment.peercode_config_map
   leetcode_service_port = var.LEETCODE_SERVICE_PORT
 }
+
+module "peercode_app" {
+  source     = "./app"
+  config_map = module.environment.peercode_config_map
+  http_port  = var.HTTP_PORT
+  https_port = var.HTTPS_PORT
+}
+
+module "cloudflare" {
+  source                = "./cloudflare"
+  cloudflare_account_id = var.cloudflare_account_id
+  cloudflare_api_token  = var.cloudflare_api_token
+  cloudflare_zone_id    = var.cloudflare_zone_id
+  cloudflare_services   = var.cloudflare_services
+}
+
+# module "nginx" {
+#   source = "./nginx_reverse_proxy"
+# }

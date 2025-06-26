@@ -33,6 +33,7 @@ resource "kubernetes_config_map" "peercode_config" {
     QUESTION_SERVICE_URL                           = var.QUESTION_SERVICE_URL
     KAFKA_GROUP_LEETCODE_SERVICE                   = var.KAFKA_GROUP_LEETCODE_SERVICE
     LEETCODE_FETCH_LIMIT                           = var.LEETCODE_FETCH_LIMIT
+    MATCH_SERVICE_PORT                             = var.MATCH_SERVICE_PORT
   }
 }
 
