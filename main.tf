@@ -6,8 +6,6 @@ terraform {
   }
 }
 
-
-
 provider "kubernetes" {
   config_path            = var.kubeconfig_path
   host                   = var.host
@@ -15,6 +13,8 @@ provider "kubernetes" {
   client_key             = base64decode(var.client_key)
   cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
 }
+
+
 
 module "environment" {
   source = "./environment"
@@ -128,7 +128,12 @@ module "cloudflare" {
   cloudflare_account_id = var.cloudflare_account_id
   cloudflare_api_token  = var.cloudflare_api_token
   cloudflare_zone_id    = var.cloudflare_zone_id
-  cloudflare_services   = var.cloudflare_services
+
+
+  cloudflare_services_peercode    = var.cloudflare_services_peercode
+  cloudflare_services_ssh         = var.cloudflare_services_ssh
+  cloudflare_tunnel_name_peercode = var.cloudflare_tunnel_name_peercode
+  cloudflare_tunnel_name_ssh      = var.cloudflare_tunnel_name_ssh
 }
 
 # module "nginx" {
